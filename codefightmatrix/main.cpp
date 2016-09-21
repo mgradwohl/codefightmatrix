@@ -40,18 +40,20 @@ void main()
 
 	//vector<vector<int>> m1{ { 1,5 }, { 2, 6 }, { 4,3 } };
 	//ret = findPath(m1);
-	//cout << "Try #" << tries << "\t" << m1.size() << "," << m1[0].size() << "\t" << (ret ? "true" : "false") << endl;
+	//cout << "Try #" << mtx << "\t" << m1.size() << "," << m1[0].size() << "\t" << ret << endl;
 	//ret = findPath2(m1);
-	//cout << "Try #" << tries << "\t" << m1.size() << "," << m1[0].size() << "\t" << (ret ? "true" : "false") << endl;
+	//cout << "Try #" << mtx << "\t" << m1.size() << "," << m1[0].size() << "\t" << ret << endl;
 	//printMatrix(m1);
 	//cout << endl;
 
 	vector<vector<int>> m0;
-	while (ret != 0)
+	while (mtx < 10)
 	{
 		makeMatrix(m0);
+		ret = findPath(m0);
+		cout << "Matrix 1#" << mtx << "\t" << "path length: " << ret << "\t" << m0.size() << "," << m0[0].size() << "\t" << endl;
 		ret = findPath2(m0);
-		cout << "Matrix #" << mtx << "\t" << "path length: " << ret << "\t" << m0.size() << "," << m0[0].size() << "\t" << endl;
+		cout << "Matrix 2#" << mtx << "\t" << "path length: " << ret << "\t" << m0.size() << "," << m0[0].size() << "\t" << endl;
 		printMatrix(m0);
 		cout << endl;
 		mtx++;
@@ -155,10 +157,10 @@ bool findPath(vector<vector<int>> matrix)
 			int l = matrix[y][max(0, x - 1)];
 			int r = matrix[y][min(sizex-1, x + 1)];
 
-			if( (abs(l-v) ==1) ||
-				(abs(r-v) ==1) ||
-				(abs(t-v) ==1) ||
-				(abs(b-v) ==1) )
+			if( (t == v+1) ||
+				(b == v+1) ||
+				(l == v+1) ||
+				(r == v+1) )
 			{
 				ok = true;
 				x++;

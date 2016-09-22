@@ -44,9 +44,9 @@ void main()
 	// simple test
 	//vector<vector<int>> m1{ { 1,5 }, { 2, 6 }, { 4,3 } };
 	//ret = findPath(m1);
-	//cout << "Try #" << tries << "\t" << m1.size() << "," << m1[0].size() << "\t" << (ret ? "true" : "false") << endl;
+	//cout << "Try #" << mtx << "\t" << m1.size() << "," << m1[0].size() << "\t" << ret << endl;
 	//ret = findPath2(m1);
-	//cout << "Try #" << tries << "\t" << m1.size() << "," << m1[0].size() << "\t" << (ret ? "true" : "false") << endl;
+	//cout << "Try #" << mtx << "\t" << m1.size() << "," << m1[0].size() << "\t" << ret << endl;
 	//printMatrix(m1);
 	//cout << endl;
 
@@ -160,10 +160,10 @@ int findPath0(vector<vector<int>> matrix)
 			int l = matrix[y][max(0, x - 1)];
 			int r = matrix[y][min(sizex-1, x + 1)];
 
-			if( (abs(l-v) ==1) ||
-				(abs(r-v) ==1) ||
-				(abs(t-v) ==1) ||
-				(abs(b-v) ==1) )
+			if( (t == v+1) ||
+				(b == v+1) ||
+				(l == v+1) ||
+				(r == v+1) )
 			{
 				ok = true;
 				x++;

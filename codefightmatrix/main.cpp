@@ -28,16 +28,20 @@
 #include <random>
 using namespace std;
 
-bool findPath(vector<vector<int>> matrix);
-int findPath2(vector<vector<int>> matrix);
+// 0==success
+// >0 == # of iterations through to find failure
+int findPath0(vector<vector<int>> matrix);
+int findPath1(vector<vector<int>> matrix);
 bool makeMatrix(vector<vector<int>> &matrix);
 bool printMatrix(vector<vector<int>> &matrix);
 
 void main()
 {
-	int ret = 1;
+	int ret0 = 1;
+	int ret1 = 1;
 	int mtx = 1;
 
+	// simple test
 	//vector<vector<int>> m1{ { 1,5 }, { 2, 6 }, { 4,3 } };
 	//ret = findPath(m1);
 	//cout << "Try #" << tries << "\t" << m1.size() << "," << m1[0].size() << "\t" << (ret ? "true" : "false") << endl;
@@ -47,11 +51,12 @@ void main()
 	//cout << endl;
 
 	vector<vector<int>> m0;
-	while (ret != 0)
+	while (mtx < 5)
 	{
 		makeMatrix(m0);
-		ret = findPath2(m0);
-		cout << "Matrix #" << mtx << "\t" << "path length: " << ret << "\t" << m0.size() << "," << m0[0].size() << "\t" << endl;
+		ret0 = findPath0(m0);
+		ret1 = findPath1(m0);
+		cout << "Matrix #" << mtx << "\t" << "r0: " << ret0 << " r1: " << ret1 << "\t" << m0.size() << "," << m0[0].size() << "\t" << endl;
 		printMatrix(m0);
 		cout << endl;
 		mtx++;
@@ -134,7 +139,7 @@ bool printMatrix(vector<vector<int>> &matrix)
 	return true;
 }
 
-bool findPath(vector<vector<int>> matrix)
+int findPath0(vector<vector<int>> matrix)
 {
 	int sizey = (int)matrix.size();
 	int sizex = (int)matrix[0].size();
@@ -172,10 +177,10 @@ bool findPath(vector<vector<int>> matrix)
 		y++;
 	}
 
-	return ok;
+	return ok?0:x*y;
 }
 
-int findPath2(vector<vector<int>> matrix)
+int findPath1(vector<vector<int>> matrix)
 {
 	int sizey = (int)matrix.size();
 	int sizex = (int)matrix[0].size();
@@ -251,12 +256,5 @@ int findPath2(vector<vector<int>> matrix)
 		i++;
 	}
 
-	if (ok)
-	{
-		return 0;
-	}
-	else
-	{
-		return i-2;
-	}
+	return ok ? 0 : i - 2;
 }
